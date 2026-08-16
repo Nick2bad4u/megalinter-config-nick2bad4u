@@ -1,0 +1,46 @@
+{
+    "AbsolutePaths": false,
+    "BasePath": "",
+    "CommentsPath": "",
+    "Confidences": [
+        "High",
+        "Medium"
+    ],
+    "CrawlArchives": false,
+    "DisableParallel": false,
+    "DisableSuppression": false,
+    "ExitCodeIsNumIssues": false,
+    "Globs": [
+        "**/.git/**",
+        "**/.cache/**",
+        "**/coverage/**",
+        "**/dist/**",
+        "**/node_modules/**",
+        "**/out/**",
+        "**/release/**",
+        "**/target/**",
+        "**/*.d.ts",
+        "**/*.map",
+        "**/*.min.css",
+        "**/*.min.js",
+        "**/*.snap"
+    ],
+    "IgnoreDefaultRules": false,
+    "IgnoreRuleIds": [],
+    "LanguageRuleIgnoreMap": {},
+    "LanguagesPath": "",
+    "OutputFile": "",
+    "OutputFileFormat": "text",
+    "OutputTextFormat": "%F:%L:%C [%S] %R - %N",
+    "RespectGitIgnore": true,
+    "RuleIds": [],
+    "Rules": [],
+    "Severities": [
+        "Critical",
+        "Important",
+        "Moderate",
+        "BestPractice",
+        "ManualReview"
+    ],
+    "SkipExcerpts": false
+}

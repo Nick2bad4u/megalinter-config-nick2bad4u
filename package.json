@@ -1,0 +1,158 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "name": "megalinter-config-nick2bad4u",
+    "version": "1.0.0",
+    "private": false,
+    "description": "Shared MegaLinter configuration backed by Nick2bad4u's published lint presets.",
+    "keywords": [
+        "configuration",
+        "linting",
+        "mega-linter",
+        "megalinter",
+        "shared-config"
+    ],
+    "homepage": "https://github.com/Nick2bad4u/megalinter-config-nick2bad4u#readme",
+    "bugs": {
+        "url": "https://github.com/Nick2bad4u/megalinter-config-nick2bad4u/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Nick2bad4u/megalinter-config-nick2bad4u.git"
+    },
+    "license": "MIT",
+    "author": "Nick2bad4u <20943337+Nick2bad4u@users.noreply.github.com> (https://github.com/Nick2bad4u)",
+    "contributors": [
+        {
+            "name": "Nick2bad4u",
+            "email": "20943337+Nick2bad4u@users.noreply.github.com",
+            "url": "https://github.com/Nick2bad4u"
+        }
+    ],
+    "sideEffects": false,
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./index.d.ts",
+            "import": "./preset.mjs"
+        },
+        "./config": "./megalinter-shared.yml",
+        "./configs/*": "./configs/*",
+        "./package.json": "./package.json"
+    },
+    "main": "./preset.mjs",
+    "types": "./index.d.ts",
+    "files": [
+        "configs",
+        "index.d.ts",
+        "preset.mjs",
+        "megalinter-shared.yml",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "node scripts/sync-configs.mjs",
+        "changelog:generate": "git cliff --config node_modules/gitcliff-config-nick2bad4u/cliff.toml --github-repo Nick2bad4u/megalinter-config-nick2bad4u --output CHANGELOG.md",
+        "changelog:preview": "git cliff --config node_modules/gitcliff-config-nick2bad4u/cliff.toml --github-repo Nick2bad4u/megalinter-config-nick2bad4u --unreleased",
+        "changelog:release-notes": "git cliff --config node_modules/gitcliff-config-nick2bad4u/cliff.toml --github-repo Nick2bad4u/megalinter-config-nick2bad4u --current",
+        "check:generated": "node scripts/sync-configs.mjs --check",
+        "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:package && npm run lint:configs && npm run lint:remark",
+        "lint:configs": "node scripts/validate-configs.mjs",
+        "lint:eslint": "eslint \"**/*.{js,mjs}\" --cache --cache-location .cache/.eslintcache --cache-strategy content",
+        "lint:eslint:fix": "npm run lint:eslint -- --fix",
+        "lint:gitleaks": "gitleaks dir --config .gitleaks.toml .",
+        "lint:package": "npmPkgJsonLint . --config .npmpackagejsonlintrc.cjs && sort-package-json --check package.json && publint",
+        "lint:prettier": "prettier . --check --cache --cache-location .cache/.prettier-cache --cache-strategy content",
+        "lint:prettier:fix": "prettier . --write --cache --cache-location .cache/.prettier-cache --cache-strategy content",
+        "lint:remark": "remark . --frail --ignore-path .remarkignore",
+        "lint:remark:fix": "remark . --ignore-path .remarkignore --output",
+        "prepack": "npm run build",
+        "package:check": "npm pack --dry-run",
+        "prepare": "npm run build",
+        "release:check": "npm run release:verify",
+        "release:verify": "npm run sync:node-version-files:check && npm run sync:npm-version:check && npm run build && npm run check:generated && npm run lint && npm run typecheck && npm test && npm run package:check",
+        "sync:node-version-files": "node scripts/sync-node-version-files.mjs",
+        "sync:node-version-files:check": "node scripts/sync-node-version-files.mjs --check",
+        "sync:npm-version": "node scripts/sync-npm-version.mjs",
+        "sync:npm-version:check": "node scripts/sync-npm-version.mjs --check",
+        "test": "vitest run",
+        "test:consumer": "node scripts/test-packed-consumer.mjs",
+        "test:coverage": "vitest run --coverage",
+        "test:coverage:ci": "vitest run --coverage --reporter=github-actions --reporter=dot --reporter=junit --outputFile=test-report.junit.xml --silent",
+        "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+        "update-actions": "actions-up --yes --style sha --quiet",
+        "update-all": "npm run update-actions && npm run update-deps",
+        "update-deps": "ncu --configFileName .ncurc.json --configFilePath node_modules/ncu-config-nick2bad4u && cross-env npm_config_allow_scripts= npm update --force && npm run sync:node-version-files && npm run sync:npm-version",
+        "verify": "npm run release:verify"
+    },
+    "dependencies": {
+        "checkov-config-nick2bad4u": "^1.0.0",
+        "cspell-config-nick2bad4u": "^1.0.0",
+        "devskim-config-nick2bad4u": "^1.0.0",
+        "eslint": "^10.8.0",
+        "eslint-config-nick2bad4u": "^14.0.1",
+        "gitleaks-config-nick2bad4u": "^1.0.4",
+        "grype-config-nick2bad4u": "^1.0.0",
+        "htmlhint-config-nick2bad4u": "^1.0.0",
+        "jscpd": "^5.0.12",
+        "jscpd-config-nick2bad4u": "^1.1.0",
+        "kics-config-nick2bad4u": "^1.0.0",
+        "lychee-config-nick2bad4u": "^2.0.0",
+        "markdown-link-check-config-nick2bad4u": "^1.0.0",
+        "markdownlint-config-nick2bad4u": "^1.0.0",
+        "npm-package-json-lint": "^10.5.1",
+        "npm-package-json-lint-config-nick2bad4u": "^1.0.4",
+        "prettier": "^3.9.4",
+        "prettier-config-nick2bad4u": "^2.0.2",
+        "remark-config-nick2bad4u": "^1.1.3",
+        "secretlint": "^13.0.2",
+        "secretlint-config-nick2bad4u": "^1.1.2",
+        "stylelint": "^17.9.1",
+        "stylelint-config-nick2bad4u": "^2.1.0",
+        "typescript": "^6.0.3",
+        "yamllint-config-nick2bad4u": "^1.1.1"
+    },
+    "devDependencies": {
+        "@types/node": "^26.1.0",
+        "@vitest/coverage-v8": "^4.1.10",
+        "actions-up": "^1.17.0",
+        "ajv": "^8.18.0",
+        "cross-env": "^10.1.0",
+        "git-cliff": "^2.13.1",
+        "gitcliff-config-nick2bad4u": "^1.5.0",
+        "ncu-config-nick2bad4u": "^0.2.1",
+        "npm-check-updates": "^22.2.9",
+        "publint": "^0.3.21",
+        "remark": "^15.0.1",
+        "remark-cli": "^12.0.1",
+        "sort-package-json": "^4.0.0",
+        "vitest": "^4.1.9",
+        "yaml": "^2.9.0"
+    },
+    "packageManager": "npm@12.0.2",
+    "engines": {
+        "node": "^22.22.3 || ^24.16.0 || >=26.3.0"
+    },
+    "devEngines": {
+        "runtime": {
+            "name": "node",
+            "version": "^22.22.3 || ^24.16.0 || >=26.3.0",
+            "onFail": "error"
+        },
+        "packageManager": {
+            "name": "npm",
+            "version": ">=12",
+            "onFail": "error"
+        }
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true,
+        "registry": "https://registry.npmjs.org/"
+    },
+    "allowScripts": {
+        "fsevents@2.3.3": true,
+        "unrs-resolver@1.12.2": true,
+        "esbuild@0.27.7 || 0.28.1 || 0.28.2": true,
+        "core-js": false
+    }
+}

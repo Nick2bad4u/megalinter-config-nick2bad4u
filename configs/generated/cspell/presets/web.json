@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "dictionaries": [
+        "css",
+        "html",
+        "html-symbol-entities",
+        "softwareTerms",
+        "web-services"
+    ],
+    "enableFiletypes": [
+        "css",
+        "html",
+        "javascriptreact",
+        "less",
+        "scss",
+        "typescriptreact"
+    ],
+    "id": "nick2bad4u-web",
+    "name": "nick2bad4u web dictionaries",
+    "readonly": true,
+    "version": "0.2"
+}

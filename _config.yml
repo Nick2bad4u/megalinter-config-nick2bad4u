@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-pages-jekyll.json
+
+description: "Shared MegaLinter configuration backed by Nick2bad4u's published lint presets."
+plugins:
+    - "jekyll-sitemap"
+    - "jekyll-seo-tag"
+    - "jekyll-paginate"
+    - "jekyll-feed"
+    - "jekyll-mentions"
+    - "jekyll-avatar"
+    - "jekyll-github-metadata"
+    - "jekyll-include-cache"
+remote_theme: "pages-themes/hacker@v0.2.0"
+title: "MegaLinter Config Nick2bad4u"
+url: "https://nick2bad4u.github.io/megalinter-config-nick2bad4u" # the base hostname & protocol for your site

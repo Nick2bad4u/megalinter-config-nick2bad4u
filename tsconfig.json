@@ -1,0 +1,28 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "checkJs": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["ES2024"],
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "noEmit": true,
+        "noImplicitOverride": true,
+        "noUncheckedIndexedAccess": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2024",
+        "types": ["node", "vitest/globals"]
+    },
+    "exclude": [
+        ".cache",
+        "configs/generated",
+        "coverage",
+        "node_modules",
+        "temp"
+    ],
+    "include": ["scripts/**/*.mjs", "test/**/*.mjs"]
+}

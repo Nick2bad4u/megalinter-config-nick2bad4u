@@ -1,0 +1,32 @@
+version: 2
+updates:
+    - package-ecosystem: "npm"
+      directory: "/"
+      schedule:
+          interval: "weekly"
+      open-pull-requests-limit: 10
+      reviewers:
+          - "Nick2bad4u"
+      versioning-strategy: "increase-if-necessary"
+      groups:
+          shared-configs:
+              patterns:
+                  - "*-config-nick2bad4u"
+          npm-toolchain:
+              patterns:
+                  - "eslint"
+                  - "jscpd"
+                  - "npm-package-json-lint"
+                  - "prettier"
+                  - "remark*"
+                  - "secretlint"
+                  - "stylelint"
+                  - "typescript"
+
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          interval: "weekly"
+      open-pull-requests-limit: 10
+      reviewers:
+          - "Nick2bad4u"

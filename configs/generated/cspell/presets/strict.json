@@ -1,0 +1,11 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "allowCompoundWords": false,
+    "id": "nick2bad4u-strict",
+    "ignoreRandomStrings": false,
+    "name": "nick2bad4u strict overlay",
+    "readonly": true,
+    "unknownWords": "report-all",
+    "validateDirectives": true,
+    "version": "0.2"
+}

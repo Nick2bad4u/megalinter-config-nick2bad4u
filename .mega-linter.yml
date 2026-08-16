@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/oxsecurity/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
+# Local overlay: exercise the checked-in package files while inheriting shared policy.
+
+EXTENDS: "megalinter-shared.yml"
+
+ACTION_ACTIONLINT_CONFIG_FILE: "configs/actionlint.yaml"
+COPYPASTE_JSCPD_CONFIG_FILE: "configs/generated/jscpd.json"
+CSS_STYLELINT_CONFIG_FILE: "configs/stylelint.config.mjs"
+HTML_HTMLHINT_CONFIG_FILE: "configs/generated/htmlhint.json"
+JAVASCRIPT_ES_CONFIG_FILE: "configs/eslint.mjs"
+JAVASCRIPT_PRETTIER_CONFIG_FILE: "configs/prettier.config.mjs"
+JSON_NPM_PACKAGE_JSON_LINT_CONFIG_FILE: "configs/npm-package-json-lint.config.cjs"
+JSON_PRETTIER_CONFIG_FILE: "configs/prettier.config.mjs"
+JSX_ESLINT_CONFIG_FILE: "configs/eslint.mjs"
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: "configs/generated/markdownlint.json"
+REPOSITORY_CHECKOV_CONFIG_FILE: "configs/generated/checkov.yml"
+REPOSITORY_DEVSKIM_CONFIG_FILE: "configs/generated/devskim.json"
+REPOSITORY_GRYPE_CONFIG_FILE: "configs/generated/grype.yaml"
+REPOSITORY_SECRETLINT_CONFIG_FILE: "configs/secretlint.config.cjs"
+SPELL_CSPELL_CONFIG_FILE: "configs/generated/cspell/cspell.json"
+SPELL_LYCHEE_CONFIG_FILE: "configs/generated/lychee.toml"
+TSX_ESLINT_CONFIG_FILE: "configs/eslint.mjs"
+TYPESCRIPT_ES_CONFIG_FILE: "configs/eslint.mjs"
+TYPESCRIPT_PRETTIER_CONFIG_FILE: "configs/prettier.config.mjs"
+YAML_PRETTIER_CONFIG_FILE: "configs/prettier.config.mjs"
+YAML_YAMLLINT_CONFIG_FILE: "configs/generated/yamllint.yaml"

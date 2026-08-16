@@ -1,0 +1,168 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: "Continuous Integration"
+
+on:
+    merge_group:
+        types:
+            - "checks_requested"
+    pull_request:
+    push:
+        branches:
+            - "main"
+
+concurrency:
+    group: "ci-${{ github.workflow }}-${{ github.ref }}"
+    cancel-in-progress: true
+
+permissions:
+    contents: "read"
+
+jobs:
+    verify:
+        name: "Verify (${{ matrix.os }})"
+        runs-on: "${{ matrix.os }}"
+        timeout-minutes: 60
+        strategy:
+            fail-fast: true
+            matrix:
+                os:
+                    - "ubuntu-latest"
+                    - "windows-latest"
+        steps:
+            - name: "Harden runner"
+              if: "${{ runner.os == 'Linux' }}"
+              uses: "step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920" # v2.20.0
+              with:
+                  egress-policy: "audit"
+
+            - name: "Checkout repository"
+              uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+
+            - name: "Setup Node.js"
+              uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020" # v7.0.0
+              with:
+                  node-version-file: ".node-version"
+                  cache: "npm"
+                  cache-dependency-path: "package-lock.json"
+
+            - name: "Install npm 12"
+              run: "npm install --global npm@12.0.2"
+
+            - name: "Install dependencies without lifecycle scripts"
+              run: "npm ci --ignore-scripts"
+
+            - name: "Verify lifecycle-script policy"
+              run: "npm install-scripts ls --json"
+
+            - name: "Run release verification"
+              run: "npm run release:verify"
+
+    coverage:
+        name: "Coverage and Codecov"
+        needs: "verify"
+        runs-on: "ubuntu-latest"
+        timeout-minutes: 60
+        env:
+            CODECOV_TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+        steps:
+            - name: "Harden runner"
+              uses: "step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920" # v2.20.0
+              with:
+                  egress-policy: "audit"
+
+            - name: "Checkout repository"
+              uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+
+            - name: "Setup Node.js"
+              uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020" # v7.0.0
+              with:
+                  node-version-file: ".node-version"
+                  cache: "npm"
+                  cache-dependency-path: "package-lock.json"
+
+            - name: "Install npm 12"
+              run: "npm install --global npm@12.0.2"
+
+            - name: "Install dependencies without lifecycle scripts"
+              run: "npm ci --ignore-scripts"
+
+            - name: "Run tests with coverage and JUnit output"
+              run: "npm run test:coverage:ci"
+
+            - name: "Verify coverage and test artifacts"
+              shell: "bash"
+              run: |
+                  set -euo pipefail
+                  test -f coverage/lcov.info
+                  test -f test-report.junit.xml
+
+            - name: "Require Codecov token"
+              if: "${{ env.CODECOV_TOKEN == '' && github.event_name != 'pull_request' }}"
+              shell: "bash"
+              run: |
+                  set -euo pipefail
+                  if [[ -z "${CODECOV_TOKEN}" ]]; then
+                    echo "::error title=Missing Codecov token::Configure the CODECOV_TOKEN Actions secret."
+                    exit 1
+                  fi
+
+            - name: "Upload test results to Codecov"
+              if: "${{ env.CODECOV_TOKEN != '' }}"
+              uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
+              with:
+                  disable_search: true
+                  fail_ci_if_error: true
+                  files: "test-report.junit.xml"
+                  flags: "unit"
+                  name: "vitest-junit"
+                  report_type: "test_results"
+                  slug: "Nick2bad4u/megalinter-config-nick2bad4u"
+                  token: "${{ env.CODECOV_TOKEN }}"
+                  verbose: true
+
+            - name: "Upload coverage to Codecov"
+              if: "${{ env.CODECOV_TOKEN != '' }}"
+              uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
+              with:
+                  disable_search: true
+                  fail_ci_if_error: true
+                  files: "coverage/lcov.info"
+                  flags: "unit"
+                  name: "vitest-coverage"
+                  report_type: "coverage"
+                  slug: "Nick2bad4u/megalinter-config-nick2bad4u"
+                  token: "${{ env.CODECOV_TOKEN }}"
+                  verbose: true
+
+    packed-consumer:
+        name: "Verify packed consumer"
+        needs: "verify"
+        runs-on: "ubuntu-latest"
+        timeout-minutes: 60
+        steps:
+            - name: "Harden runner"
+              uses: "step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920" # v2.20.0
+              with:
+                  egress-policy: "audit"
+
+            - name: "Checkout repository"
+              uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+
+            - name: "Setup Node.js"
+              uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020" # v7.0.0
+              with:
+                  node-version-file: ".node-version"
+                  cache: "npm"
+                  cache-dependency-path: "package-lock.json"
+
+            - name: "Install npm 12"
+              run: "npm install --global npm@12.0.2"
+
+            - name: "Install dependencies without lifecycle scripts"
+              run: "npm ci --ignore-scripts"
+
+            - name: "Build synchronized config assets"
+              run: "npm run build"
+
+            - name: "Install and verify the tarball in a clean consumer"
+              run: "npm run test:consumer"

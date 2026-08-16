@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: "MegaLinter"
+
+on:
+    pull_request:
+    push:
+        branches:
+            - "main"
+    workflow_dispatch:
+
+concurrency:
+    group: "mega-linter-${{ github.workflow }}-${{ github.ref }}"
+    cancel-in-progress: true
+
+permissions:
+    checks: "write"
+    contents: "read"
+    pull-requests: "write"
+
+jobs:
+    lint:
+        name: "Run MegaLinter"
+        runs-on: "ubuntu-latest"
+        timeout-minutes: 60
+        steps:
+            - name: "Harden runner"
+              uses: "step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920" # v2.20.0
+              with:
+                  egress-policy: "audit"
+
+            - name: "Checkout repository"
+              uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+
+            - name: "Setup Node.js"
+              uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020" # v7.0.0
+              with:
+                  node-version-file: ".node-version"
+                  cache: "npm"
+
+            - name: "Install npm 12"
+              run: "npm install --global npm@12.0.2"
+
+            - name: "Install locked shared configs"
+              run: "npm ci --ignore-scripts"
+
+            - name: "Run MegaLinter"
+              uses: "oxsecurity/megalinter@15e5b45552097e318c93de385779ce3b1084052c" # v10.0.0
+              env:
+                  GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+            - name: "Upload MegaLinter reports"
+              if: "${{ !cancelled() }}"
+              uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7.0.1
+              with:
+                  name: "mega-linter-reports"
+                  path: |
+                      megalinter-reports
+                      mega-linter.log
+                  if-no-files-found: "ignore"
+                  retention-days: 14

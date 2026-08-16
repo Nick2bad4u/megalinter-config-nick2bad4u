@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://www.schemastore.org/codecov.json
+
+codecov:
+    branch: "main"
+    max_report_age: "24h"
+    notify:
+        wait_for_ci: true
+    require_ci_to_pass: true
+    slug: "nick2bad4u/megalinter-config-nick2bad4u"
+
+comment:
+    behavior: "default"
+    layout: "header, diff, flags, files, footer"
+    require_base: false
+    require_changes: false
+    require_head: true
+
+component_management:
+    default_rules:
+        statuses:
+            - target: "auto"
+              threshold: "2%"
+              type: "project"
+    individual_components:
+        - component_id: "source"
+          name: "Published JavaScript"
+          paths:
+              - "preset.mjs"
+              - "configs/**/*.cjs"
+              - "configs/**/*.mjs"
+
+coverage:
+    precision: 2
+    range: "60...100"
+    round: "down"
+    status:
+        patch:
+            default:
+                target: "100%"
+                threshold: "1%"
+        project:
+            default:
+                target: "100%"
+                threshold: "1%"
+
+flags:
+    unit:
+        paths:
+            - "preset.mjs"
+            - "configs/"
+
+ignore:
+    - "coverage/**"
+    - "scripts/**"
+    - "test/**"
+    - "configs/generated/**"
+    - "**/*.d.ts"
+    - "**/*.test.*"
+    - "**/*.spec.*"

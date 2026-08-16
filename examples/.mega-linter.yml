@@ -1,0 +1,2 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/oxsecurity/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
+EXTENDS: "node_modules/megalinter-config-nick2bad4u/megalinter-shared.yml"

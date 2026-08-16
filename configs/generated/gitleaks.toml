@@ -1,0 +1,64 @@
+# Gitleaks configuration for Nick2bad4u shared TypeScript projects.
+# See: https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+# This file is intentionally named `gitleaks.toml` instead of `.gitleaks.toml` to avoid being automatically picked up by Gitleaks in this repository.
+# Consumers should reference it directly via `--config` or `GITLEAKS_CONFIG` to ensure it doesn't accidentally get overridden by a local `.gitleaks.toml`.
+"$schema"  = "https://json.schemastore.org/gitleaks.json"
+title      = "Nick2bad4u shared secret detection configuration"
+minVersion = "v8.25.0"
+
+# Extend the built-in Gitleaks defaults instead of replacing them.
+[extend]
+    useDefault = true
+
+    # The generic rule is intentionally noisy for JavaScript/TypeScript config
+    # packages. Keep high-confidence provider rules from the default config.
+    disabledRules = [ "generic-api-key" ]
+
+# Global allowlists for generated artifacts and known-safe files.
+[[allowlists]]
+    description = "Ignore generated TypeDoc JSON output"
+    paths       = [ '''^docs/typedoc\.json$''' ]
+
+# Custom rules for project-specific patterns
+[[rules]]
+    id          = "database-connection-strings"
+    description = "Detect database connection strings with embedded credentials"
+    regex       = '''(?i)(database_url|db_url|connection_string)\s*[:=]\s*["']?([^"'\s]+://[^"'\s]*:[^"'\s]*@[^"'\s]+)["']?'''
+    secretGroup = 2
+    keywords    = [ "connection", "database", "db", "url" ]
+    tags        = [ "connection-string", "credentials", "database" ]
+
+    [[rules.allowlists]]
+        description = "Allow example connection strings in documentation"
+        paths       = [ '''docs/.*\.(md|txt|rst)$''' ]
+        regexTarget = "secret"
+        regexes     = [ '''(?i)(example|localhost|127\.0\.0\.1|test|demo)''' ]
+
+[[rules]]
+    id          = "nick2bad4u-sensitive-env-vars"
+    description = "Detect sensitive Nick2bad4u environment variable assignments"
+    regex       = '''(?i)(?:\$env:|["']?)(NODE_AUTH_TOKEN|SONAR_TOKEN|NPM_TOKEN|PRIVATE_TOKEN|GOOGLE_API_KEY|CODECOV_TOKEN(?:_FFV)?|STRYKER_DASHBOARD_API_KEY|(?:UW|TF)_STRYKER_DASHBOARD_API_KEY|PAT_TOKEN|GITHUB_TOKEN|GITHUB_PAT|PSGalleryApiKey|NuGetApiKey|NUGET_KEY|LASTFM_API_KEY|LASTFM_API_SECRET|WAKATIME_API_KEY|STRAVA_(?:ACCESS|REFRESH)_TOKEN|POSH_OWM_API_KEY|OLLAMA_API_KEY|UPTIME_WATCHER_GOOGLE_CLIENT_SECRET)(?:["']?\s*[:=]\s*|["']?\s*,\s*)["']?([A-Za-z0-9+/_=.-]{8,})["']?'''
+    secretGroup = 2
+    keywords    = [ "API_KEY", "CLIENT_SECRET", "PAT", "SECRET", "TOKEN" ]
+    tags        = [ "environment", "powershell", "secrets" ]
+
+    [[rules.allowlists]]
+        description = "Allow obvious placeholder values"
+        regexTarget = "secret"
+        regexes     = [ '''(?i)(development|dev|test|local|localhost|example|demo|placeholder)''' ]
+
+[[rules]]
+    id          = "vite-env-secrets"
+    description = "Detect secrets in Vite environment variable definitions"
+    regex       = '''(?i)\bVITE_[A-Z0-9_]*(?:CLIENT_SECRET|PRIVATE_KEY|PASSWORD|SECRET|TOKEN)[A-Z0-9_]*\s*[:=]\s*["']?([a-zA-Z0-9+/_=.-]{16,})["']?'''
+    secretGroup = 1
+    keywords    = [ "VITE_", "CLIENT_SECRET", "PASSWORD", "PRIVATE_KEY", "SECRET", "TOKEN" ]
+    tags        = [ "environment", "frontend", "secrets", "vite" ]
+
+    [[rules.allowlists]]
+        description = "Allow development and test values"
+        regexTarget = "secret"
+        regexes     = [
+            '''(?i)(development|dev|test|local|localhost|example|demo|placeholder)''',
+            '''^(true|false|1|0|yes|no|enabled|disabled)$''',
+        ]

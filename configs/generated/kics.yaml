@@ -1,0 +1,10 @@
+# Balanced KICS policy. Platform auto-detection and .gitignore handling stay on.
+disable-secrets: false
+fail-on:
+    - "critical"
+    - "high"
+ignore-on-exit: "none"
+log-level: "INFO"
+report-formats:
+    - "json"
+timeout: 120

@@ -1,0 +1,14 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "dictionaries": [
+        "en_us",
+        "html",
+        "html-symbol-entities",
+        "public-licenses"
+    ],
+    "enableFiletypes": ["html", "markdown"],
+    "id": "nick2bad4u-docs",
+    "name": "nick2bad4u documentation dictionaries",
+    "readonly": true,
+    "version": "0.2"
+}

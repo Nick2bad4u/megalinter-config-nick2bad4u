@@ -1,0 +1,64 @@
+{
+    "$schema": "https://nodejs.org/docs/latest/node-config-schema.json",
+    "nodeOptions": {
+        "allow-fs-read": [
+            "./configs",
+            "./examples",
+            "./test",
+            "./node_modules",
+            "./coverage",
+            "./scripts",
+            "./.github",
+            "./.mega-linter.yml",
+            "./megalinter-shared.yml",
+            "./package.json",
+            "./package-lock.json",
+            "./tsconfig.json",
+            "./tsconfig.typecheck.json",
+            "./eslint.config.mjs",
+            "./vitest.config.mjs",
+            "./README.md",
+            "./CHANGELOG.md",
+            "./LICENSE"
+        ],
+        "allow-fs-write": [
+            "./coverage",
+            "./temp",
+            "./.cache"
+        ],
+        "conditions": ["development", "node"],
+        "diagnostic-dir": "./temp",
+        "enable-source-maps": true,
+        "extra-info-on-fatal-exception": true,
+        "max-old-space-size-percentage": "80",
+        "trace-deprecation": false,
+        "trace-warnings": false,
+        "warnings": true
+    },
+    "test": {
+        "experimental-test-coverage": true,
+        "test-concurrency": 4,
+        "test-coverage-branches": 80,
+        "test-coverage-exclude": [
+            "**/test/**",
+            "**/*.test.mjs",
+            "**/*.spec.mjs",
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/coverage/**"
+        ],
+        "test-coverage-functions": 80,
+        "test-coverage-include": [
+            "preset.mjs",
+            "configs/**/*.cjs",
+            "configs/**/*.mjs"
+        ],
+        "test-coverage-lines": 80,
+        "test-force-exit": false,
+        "test-isolation": "process",
+        "test-reporter": ["spec", "json"],
+        "test-reporter-destination": ["stdout", "./coverage/test-results.json"],
+        "test-timeout": 30000,
+        "test-update-snapshots": true
+    }
+}

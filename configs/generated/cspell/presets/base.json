@@ -1,0 +1,40 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "allowCompoundWords": true,
+    "caseSensitive": false,
+    "dictionaries": [
+        "en_us",
+        "softwareTerms",
+        "nick2bad4u-shared-terms"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "addWords": true,
+            "description": "Cross-repository tooling names maintained by this package.",
+            "name": "nick2bad4u-shared-terms",
+            "path": "../dictionaries/software-terms.txt"
+        }
+    ],
+    "ignorePaths": [
+        "**/*.map",
+        "**/*.min.css",
+        "**/*.min.js",
+        "**/*.snap",
+        "**/coverage/**",
+        "**/dist/**",
+        "**/node_modules/**",
+        "**/package-lock.json",
+        "**/pnpm-lock.yaml",
+        "**/release/**",
+        "**/yarn.lock"
+    ],
+    "ignoreRandomStrings": true,
+    "language": "en-US",
+    "minRandomLength": 40,
+    "minWordLength": 3,
+    "readonly": true,
+    "unknownWords": "report-common-typos",
+    "useGitignore": true,
+    "validateDirectives": true,
+    "version": "0.2"
+}

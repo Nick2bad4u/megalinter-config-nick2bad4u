@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "dictionaries": [
+        "bash",
+        "docker",
+        "filetypes",
+        "git",
+        "node",
+        "npm",
+        "powershell",
+        "softwareTerms",
+        "typescript"
+    ],
+    "enableFiletypes": [
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "shellscript",
+        "typescript",
+        "typescriptreact",
+        "yaml"
+    ],
+    "id": "nick2bad4u-code",
+    "name": "nick2bad4u code dictionaries",
+    "readonly": true,
+    "version": "0.2"
+}

@@ -1,0 +1,15 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "dictionaries": [
+        "node",
+        "npm",
+        "softwareTerms",
+        "typescript",
+        "web-services"
+    ],
+    "id": "nick2bad4u-electron",
+    "ignorePaths": ["**/*.asar", "**/release/**"],
+    "name": "nick2bad4u Electron project overlay",
+    "readonly": true,
+    "version": "0.2"
+}

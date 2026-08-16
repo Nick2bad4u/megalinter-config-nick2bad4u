@@ -1,0 +1,108 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/oxsecurity/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json
+# Publishable MegaLinter base. Consumers install this npm package and extend this file.
+
+APPLY_FIXES: "none"
+DISABLE_ERRORS: false
+FAIL_IF_MISSING_LINTER_IN_FLAVOR: true
+FAIL_IF_UPDATED_SOURCES: true
+FORMATTERS_DISABLE_ERRORS: false
+IGNORE_GENERATED_FILES: true
+IGNORE_GITIGNORED_FILES: true
+PARALLEL: true
+VALIDATE_ALL_CODEBASE: true
+
+ADDITIONAL_EXCLUDED_DIRECTORIES:
+    - ".cache"
+    - "coverage"
+    - "dist"
+    - "generated"
+    - "megalinter-reports"
+    - "temp"
+
+ENABLE_LINTERS:
+    - "ACTION_ACTIONLINT"
+    - "COPYPASTE_JSCPD"
+    - "CSS_STYLELINT"
+    - "HTML_HTMLHINT"
+    - "JAVASCRIPT_ES"
+    - "JAVASCRIPT_PRETTIER"
+    - "JSON_NPM_PACKAGE_JSON_LINT"
+    - "JSON_PRETTIER"
+    - "JSX_ESLINT"
+    - "MARKDOWN_MARKDOWNLINT"
+    - "REPOSITORY_CHECKOV"
+    - "REPOSITORY_DEVSKIM"
+    - "REPOSITORY_GRYPE"
+    - "REPOSITORY_SECRETLINT"
+    - "SPELL_CSPELL"
+    - "SPELL_LYCHEE"
+    - "TSX_ESLINT"
+    - "TYPESCRIPT_ES"
+    - "TYPESCRIPT_PRETTIER"
+    - "YAML_PRETTIER"
+    - "YAML_YAMLLINT"
+
+ACTION_ACTIONLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/actionlint.yaml"
+COPYPASTE_JSCPD_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/jscpd.json"
+CSS_STYLELINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/stylelint.config.mjs"
+HTML_HTMLHINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/htmlhint.json"
+JAVASCRIPT_ES_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/eslint.mjs"
+JAVASCRIPT_PRETTIER_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/prettier.config.mjs"
+JSON_NPM_PACKAGE_JSON_LINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/npm-package-json-lint.config.cjs"
+JSON_PRETTIER_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/prettier.config.mjs"
+JSX_ESLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/eslint.mjs"
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/markdownlint.json"
+REPOSITORY_CHECKOV_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/checkov.yml"
+REPOSITORY_DEVSKIM_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/devskim.json"
+REPOSITORY_GRYPE_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/grype.yaml"
+REPOSITORY_SECRETLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/secretlint.config.cjs"
+SPELL_CSPELL_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/cspell/cspell.json"
+SPELL_LYCHEE_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/lychee.toml"
+TSX_ESLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/eslint.mjs"
+TYPESCRIPT_ES_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/eslint.mjs"
+TYPESCRIPT_PRETTIER_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/prettier.config.mjs"
+YAML_PRETTIER_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/prettier.config.mjs"
+YAML_YAMLLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/yamllint.yaml"
+
+COPYPASTE_JSCPD_CLI_EXECUTABLE:
+    - "node_modules/.bin/jscpd"
+CSS_STYLELINT_CLI_EXECUTABLE:
+    - "node_modules/.bin/stylelint"
+JAVASCRIPT_ES_CLI_EXECUTABLE:
+    - "node_modules/.bin/eslint"
+JAVASCRIPT_PRETTIER_CLI_EXECUTABLE:
+    - "node_modules/.bin/prettier"
+JSON_NPM_PACKAGE_JSON_LINT_CLI_EXECUTABLE:
+    - "node_modules/.bin/npmPkgJsonLint"
+JSON_PRETTIER_CLI_EXECUTABLE:
+    - "node_modules/.bin/prettier"
+JSX_ESLINT_CLI_EXECUTABLE:
+    - "node_modules/.bin/eslint"
+REPOSITORY_SECRETLINT_CLI_EXECUTABLE:
+    - "node_modules/.bin/secretlint"
+TSX_ESLINT_CLI_EXECUTABLE:
+    - "node_modules/.bin/eslint"
+TYPESCRIPT_ES_CLI_EXECUTABLE:
+    - "node_modules/.bin/eslint"
+TYPESCRIPT_PRETTIER_CLI_EXECUTABLE:
+    - "node_modules/.bin/prettier"
+YAML_PRETTIER_CLI_EXECUTABLE:
+    - "node_modules/.bin/prettier"
+
+CONFIG_REPORTER: true
+CONSOLE_REPORTER: true
+CONSOLE_REPORTER_SECTIONS: true
+GITHUB_COMMENT_REPORTER: true
+GITHUB_STATUS_REPORTER: true
+JSON_REPORTER: true
+JSON_REPORTER_OUTPUT_DETAIL: "detailed"
+LOG_FILE: "mega-linter.log"
+LOG_LEVEL: "INFO"
+MARKDOWN_SUMMARY_REPORTER: true
+OUTPUT_DETAIL: "detailed"
+PRINT_ALL_FILES: false
+PRINT_ALPACA: false
+SARIF_REPORTER: true
+SHOW_ELAPSED_TIME: true
+SHOW_SKIPPED_LINTERS: true
+UPDATED_SOURCES_REPORTER: true

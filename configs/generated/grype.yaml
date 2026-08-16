@@ -1,0 +1,21 @@
+# Shared balanced Grype policy. Consumer CLI flags may override any setting.
+check-for-app-update: false
+db:
+    auto-update: true
+    max-allowed-built-age: "120h"
+    require-update-check: false
+    validate-age: true
+    validate-by-hash-on-start: true
+fail-on-severity: "high"
+output:
+    - "table"
+pretty: false
+registry:
+    insecure-skip-tls-verify: false
+    insecure-use-http: false
+search:
+    indexed-archives: true
+    scope: "squashed"
+    unindexed-archives: false
+show-suppressed: false
+sort-by: "risk"

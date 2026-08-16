@@ -1,0 +1,13 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "description": "Recommended shared CSpell policy (base, code, and docs).",
+    "id": "nick2bad4u-recommended",
+    "import": [
+        "./presets/base.json",
+        "./presets/code.json",
+        "./presets/docs.json"
+    ],
+    "name": "nick2bad4u recommended CSpell configuration",
+    "readonly": true,
+    "version": "0.2"
+}

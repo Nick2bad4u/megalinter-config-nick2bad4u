@@ -1,0 +1,8 @@
+# Balanced repository policy: report every finding and block high/critical risk.
+compact: true
+enable-secret-scan-all-files: true
+evaluate-variables: true
+hard-fail-on: "HIGH,CRITICAL"
+output:
+    - "cli"
+soft-fail-on: "LOW,MEDIUM"

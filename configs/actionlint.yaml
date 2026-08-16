@@ -1,0 +1,5 @@
+# Shared Actionlint defaults. Repository-specific variables can be added locally.
+config-variables: []
+paths: {}
+self-hosted-runner:
+    labels: []
