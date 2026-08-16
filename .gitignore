@@ -1,0 +1,9 @@
+*.tgz
+.cache/
+.lychee.report.md
+coverage/
+mega-linter.log
+megalinter-reports/
+node_modules/
+temp/
+test-report.junit.xml
