@@ -23,7 +23,8 @@
         "**/*.map",
         "**/*.min.css",
         "**/*.min.js",
-        "**/*.snap"
+        "**/*.snap",
+        "**/package-lock.json"
     ],
     "IgnoreDefaultRules": false,
     "IgnoreRuleIds": [],

@@ -22,6 +22,23 @@ describe("configuration package", () => {
         await expect(
             access(resolveConfig("generated/yamllint.yaml"))
         ).resolves.toBeUndefined();
+
+        const devSkim = /** @type {{ Globs: string[] }} */ (
+            JSON.parse(
+                await readFile(resolveConfig("generated/devskim.json"), "utf8")
+            )
+        );
+        const secretlint = /** @type {{ rules: unknown[] }} */ (
+            JSON.parse(
+                await readFile(
+                    resolveConfig("generated/secretlint.config"),
+                    "utf8"
+                )
+            )
+        );
+
+        expect(devSkim.Globs).toContain("**/package-lock.json");
+        expect(secretlint.rules.length).toBeGreaterThan(5);
     });
 
     it("missing public config paths remain observable", async () => {

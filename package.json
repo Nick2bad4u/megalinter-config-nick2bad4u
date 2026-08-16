@@ -11,7 +11,7 @@
         "megalinter",
         "shared-config"
     ],
-    "homepage": "https://github.com/Nick2bad4u/megalinter-config-nick2bad4u#readme",
+    "homepage": "https://github.com/Nick2bad4u/megalinter-config-nick2bad4u",
     "bugs": {
         "url": "https://github.com/Nick2bad4u/megalinter-config-nick2bad4u/issues"
     },
@@ -55,7 +55,7 @@
         "changelog:preview": "git cliff --config node_modules/gitcliff-config-nick2bad4u/cliff.toml --github-repo Nick2bad4u/megalinter-config-nick2bad4u --unreleased",
         "changelog:release-notes": "git cliff --config node_modules/gitcliff-config-nick2bad4u/cliff.toml --github-repo Nick2bad4u/megalinter-config-nick2bad4u --current",
         "check:generated": "node scripts/sync-configs.mjs --check",
-        "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:package && npm run lint:configs && npm run lint:remark",
+        "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:package && npm run lint:configs && npm run lint:remark && npm run lint:secretlint",
         "lint:configs": "node scripts/validate-configs.mjs",
         "lint:eslint": "eslint \"**/*.{js,mjs}\" --cache --cache-location .cache/.eslintcache --cache-strategy content",
         "lint:eslint:fix": "npm run lint:eslint -- --fix",
@@ -65,6 +65,7 @@
         "lint:prettier:fix": "prettier . --write --cache --cache-location .cache/.prettier-cache --cache-strategy content",
         "lint:remark": "remark . --frail --ignore-path .remarkignore",
         "lint:remark:fix": "remark . --ignore-path .remarkignore --output",
+        "lint:secretlint": "secretlint \"**/*\"",
         "prepack": "npm run build",
         "package:check": "npm pack --dry-run",
         "prepare": "npm run build",

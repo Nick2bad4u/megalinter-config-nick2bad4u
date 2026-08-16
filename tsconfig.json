@@ -24,5 +24,9 @@
         "node_modules",
         "temp"
     ],
-    "include": ["scripts/**/*.mjs", "test/**/*.mjs"]
+    "include": [
+        "index.d.ts",
+        "scripts/**/*.mjs",
+        "test/**/*.mjs"
+    ]
 }

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { cp, mkdir, readFile, readdir, rm } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -11,7 +11,11 @@ const repositoryRoot = path.resolve(
 const generatedRoot = path.join(repositoryRoot, "configs", "generated");
 const checkOnly = process.argv.includes("--check");
 
-/** @type {(readonly [string, string, string])[]} */
+/**
+ * @typedef {(source: string) => string} ConfigTransform
+ */
+
+/** @type {(readonly [string, string, string, ConfigTransform?])[]} */
 const fileMappings = [
     [
         "checkov-config-nick2bad4u",
@@ -22,6 +26,14 @@ const fileMappings = [
         "devskim-config-nick2bad4u",
         ".devskim.json",
         "devskim.json",
+        (source) => {
+            const config = JSON.parse(source);
+            assert.ok(Array.isArray(config.Globs));
+            if (!config.Globs.includes("**/package-lock.json")) {
+                config.Globs.push("**/package-lock.json");
+            }
+            return `${JSON.stringify(config, null, 4)}\n`;
+        },
     ],
     [
         "gitleaks-config-nick2bad4u",
@@ -62,6 +74,11 @@ const fileMappings = [
         "markdownlint-config-nick2bad4u",
         "markdownlint.json",
         "markdownlint.json",
+    ],
+    [
+        "secretlint-config-nick2bad4u",
+        ".secretlintrc.json",
+        "secretlint.config",
     ],
     [
         "yamllint-config-nick2bad4u",
@@ -150,14 +167,27 @@ for (const [
     packageName,
     sourceRelative,
     targetRelative,
+    transform,
 ] of fileMappings) {
     const source = path.join(packageRoot(packageName), sourceRelative);
     const target = path.join(generatedRoot, targetRelative);
     if (checkOnly) {
-        await assertSameFile(source, target);
+        if (transform === undefined) {
+            await assertSameFile(source, target);
+        } else {
+            assert.equal(
+                await readFile(target, "utf8"),
+                transform(await readFile(source, "utf8")),
+                `${path.relative(repositoryRoot, target)} is stale`
+            );
+        }
     } else {
         await mkdir(path.dirname(target), { recursive: true });
-        await cp(source, target);
+        if (transform === undefined) {
+            await cp(source, target);
+        } else {
+            await writeFile(target, transform(await readFile(source, "utf8")));
+        }
     }
 }
 

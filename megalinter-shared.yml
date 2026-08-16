@@ -55,7 +55,7 @@ MARKDOWN_MARKDOWNLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/co
 REPOSITORY_CHECKOV_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/checkov.yml"
 REPOSITORY_DEVSKIM_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/devskim.json"
 REPOSITORY_GRYPE_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/grype.yaml"
-REPOSITORY_SECRETLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/secretlint.config.cjs"
+REPOSITORY_SECRETLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/secretlint.config"
 SPELL_CSPELL_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/cspell/cspell.json"
 SPELL_LYCHEE_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/generated/lychee.toml"
 TSX_ESLINT_CONFIG_FILE: "node_modules/megalinter-config-nick2bad4u/configs/eslint.mjs"
