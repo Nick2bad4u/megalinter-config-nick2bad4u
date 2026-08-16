@@ -122,7 +122,7 @@ async function filesBelow(root) {
             results.push(entry.name);
         }
     }
-    return results.sort();
+    return results.sort((left, right) => left.localeCompare(right));
 }
 
 /**
