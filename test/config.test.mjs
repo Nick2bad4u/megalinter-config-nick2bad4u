@@ -37,6 +37,9 @@ describe("configuration package", () => {
             )
         );
 
+        expect(devSkim.Globs).toContain(
+            "**/configs/generated/secretlint.config"
+        );
         expect(devSkim.Globs).toContain("**/package-lock.json");
         expect(secretlint.rules.length).toBeGreaterThan(5);
     });

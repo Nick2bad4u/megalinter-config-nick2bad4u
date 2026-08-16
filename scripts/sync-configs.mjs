@@ -29,8 +29,13 @@ const fileMappings = [
         (source) => {
             const config = JSON.parse(source);
             assert.ok(Array.isArray(config.Globs));
-            if (!config.Globs.includes("**/package-lock.json")) {
-                config.Globs.push("**/package-lock.json");
+            for (const excludedPath of [
+                "**/configs/generated/secretlint.config",
+                "**/package-lock.json",
+            ]) {
+                if (!config.Globs.includes(excludedPath)) {
+                    config.Globs.push(excludedPath);
+                }
             }
             return `${JSON.stringify(config, null, 4)}\n`;
         },
