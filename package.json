@@ -1,7 +1,7 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
     "name": "megalinter-config-nick2bad4u",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": false,
     "description": "Shared MegaLinter configuration backed by Nick2bad4u's published lint presets.",
     "keywords": [
